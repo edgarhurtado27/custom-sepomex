@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, abort, request, Response
-from . import utils
+from . import mongoclient
 
 # Instanciamos el servidor
 app = Flask(__name__)
@@ -15,12 +15,12 @@ def customSepomexHandler(zipCode):
     if request.method == 'POST':
         tmpObj = {}
         tmpObj['zipCode'] = zipCode
-        utils.CustomMongoClient.insertOne('zipCodes', tmpObj)
+        mongoclient.CustomMongoClient.insertOne('zipCodes', tmpObj)
         return jsonify({ 'code': 200, 'message': 'Object inserted'})
 
     query = {}
     query['zipCode'] = zipCode
-    result = utils.CustomMongoClient.findOne('zipCodes', query)
+    result = mongoclient.CustomMongoClient.findOne('zipCodes', query)
 
     if result is None : abort(404)
 
