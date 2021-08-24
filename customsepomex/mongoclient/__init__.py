@@ -5,7 +5,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 class CustomMongoClient(object):
-    MONGO_HOST = 'localhost'
+    MONGO_HOST = 'mongo'
     MONGO_PORT = 27017
     MONGO_DATABASE = 'sepomex'
     dbInstance = None

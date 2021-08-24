@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  api-sepomex:
+    build: .
+    ports:
+      - "5000:5000"
+  mongo:
+    image: "mongo:5.0"
