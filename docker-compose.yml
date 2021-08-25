@@ -1,9 +1,16 @@
 version: '3'
 
+volumes:
+  mongodb-sepomex:
+
 services:
   api-sepomex:
     build: .
+    container_name: api-sepomex
+    image: custom/api-sepomex:v1
     ports:
       - "5000:5000"
   mongo:
     image: "mongo:5.0"
+    volumes:
+      - mongodb-sepomex:/data/db
