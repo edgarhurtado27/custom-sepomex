@@ -34,7 +34,7 @@ count = 0
 while True:
     count += 1
     line = zipCodesFile.readline()
- 
+
     # if line is empty end of file is reached
     if not line: break
 
@@ -42,8 +42,8 @@ while True:
         register = {}
         data = line.strip().split('|')
         cp = data[0]
-        
-        if zipCodesMap.get(cp) is not None : 
+
+        if zipCodesMap.get(cp) is not None :
             register = zipCodesMap.get(cp)
             register.get('colonias').append(data[1])
         else :
@@ -57,8 +57,14 @@ while True:
 logging.info('Closing file')
 zipCodesFile.close()
 
+logging.info('Begin import')
+
 for key in zipCodesMap:
     CustomMongoClient.insertOne('zipCodes', zipCodesMap[key])
 
-logging.info('Import finished')
 
+logging.info('Deleting files')
+os.remove('./customsepomex/source/salida.zip')
+os.remove('./customsepomex/source/CPdescarga.txt')
+
+logging.info('Import finished')
