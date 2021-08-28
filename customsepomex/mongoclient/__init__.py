@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-import logging
+import logging, os
 
 logging.basicConfig(level=logging.INFO)
 
@@ -10,11 +10,14 @@ class CustomMongoClient(object):
     MONGO_DATABASE = 'sepomex'
     dbInstance = None
     dbCollection = {}
+    MONGO_USERNAME = os.getenv('MONGO_USERNAME')
+    MONGO_PASSWORD = os.getenv('MONGO_PASSWORD')
+    uri = f'mongodb://{MONGO_USERNAME}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}/{MONGO_DATABASE}?authSource=admin'
 
     @staticmethod
     def initialize():
         logging.debug('Opening connection')
-        client = MongoClient(CustomMongoClient.MONGO_HOST, CustomMongoClient.MONGO_PORT)
+        client = MongoClient(CustomMongoClient.uri)
         CustomMongoClient.dbInstance = client[CustomMongoClient.MONGO_DATABASE]
 
     @staticmethod
