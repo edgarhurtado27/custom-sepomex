@@ -10,6 +10,7 @@ RUN apk add --no-cache gcc musl-dev linux-headers
 COPY python_dependencies.txt python_dependencies.txt
 
 RUN pip install -r python_dependencies.txt
+EXPOSE 5000
 
 COPY . .
 

@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 
 volumes:
   mongodb-sepomex:
@@ -10,7 +10,9 @@ services:
     image: custom/api-sepomex:v1
     ports:
       - "5000:5000"
+    environment:
+      FLASK_ENV: ${API_ENVIROMENT}
   mongo:
-    image: "mongo:5.0"
+    image: "mongo:${MONGO_TAG}"
     volumes:
       - mongodb-sepomex:/data/db
