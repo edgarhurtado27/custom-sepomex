@@ -1,3 +1,4 @@
 requests
 Flask
+Flask-Caching
 pymongo[srv]

@@ -1,15 +1,27 @@
-from flask import Flask, jsonify, abort, request, Response
+from flask import Flask, jsonify, abort
+from flask_caching import Cache
 from . import mongoclient
+
+
+config = {
+    "DEBUG": True,
+    "CACHE_TYPE": "SimpleCache",
+    "CACHE_DEFAULT_TIMEOUT": 300,
+    "JSON_AS_ASCII": False
+}
 
 # Instanciamos el servidor
 app = Flask(__name__)
-app.config['JSON_AS_ASCII'] = False
+app.config.from_mapping(config)
+cache = Cache(app)
+
 
 @app.route('/custom/ping')
 def ping():
     return jsonify({ 'mensaje': 'App Online' })
 
 @app.route('/custom/sepomex/<string:zipCode>', methods=['GET'])
+@cache.cached(timeout=50)
 def customSepomexHandler(zipCode):
     if not zipCode.isnumeric() : abort(400)
 
