@@ -16,9 +16,6 @@ jobs:
       - name: Build and push to docker
         uses: docker/build-push-action@v2
         with:
-          repository: ${{ github.repository }}
-          tag_with_ref: true
-          tag_with_sha: true
           push: true
-          tags: ${{ github.sha  }}
+          tags: edgarhurtado/custom-sepomex:latest
 
