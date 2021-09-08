@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config.from_mapping(config)
 
 
-@app.route('/custom/ping')
+@app.route('/')
 def ping():
     return jsonify({ 'mensaje': 'App Online' })
 
