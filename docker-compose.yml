@@ -14,6 +14,7 @@ services:
       FLASK_ENV: ${API_ENVIROMENT}
       MONGO_USERNAME: ${CUSTOM_MONGO_ROOT_USERNAME}
       MONGO_PASSWORD: ${CUSTOM_MONGO_ROOT_PASSWORD}
+      CUSTOM_MONGO_HOST: "mongo"
   mongo:
     image: "mongo:${MONGO_TAG}"
     container_name: mongo-sepomex
