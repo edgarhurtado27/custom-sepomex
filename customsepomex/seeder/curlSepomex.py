@@ -18,15 +18,15 @@ DATA = "__EVENTTARGET=&__EVENTARGUMENT=&__LASTFOCUS=&__VIEWSTATE=%2FwEPDwUINzcwO
 r = requests.post(url = API_ENDPOINT, data = DATA, headers = HEADERS)
 
 # Saving zip file
-with open(r'./customsepomex/source/salida.zip','wb') as f:
+with open(r'/tmp/salida.zip','wb') as f:
     f.write(r.content)
 
 # Extract data
-with ZipFile('./customsepomex/source/salida.zip', 'r') as myzip:
-    myzip.extractall('./customsepomex/source/')
+with ZipFile('/tmp/salida.zip', 'r') as myzip:
+    myzip.extractall('/tmp/')
 
 logging.info('Reading file')
-zipCodesFile = open('./customsepomex/source/CPdescarga.txt', encoding='latin-1')
+zipCodesFile = open('/tmp/CPdescarga.txt', encoding='latin-1')
 
 zipCodesMap = {}
 
@@ -64,7 +64,7 @@ for key in zipCodesMap:
 
 
 logging.info('Deleting files')
-os.remove('./customsepomex/source/salida.zip')
-os.remove('./customsepomex/source/CPdescarga.txt')
+os.remove('/tmp/salida.zip')
+os.remove('/tmp/CPdescarga.txt')
 
 logging.info('Import finished')
