@@ -3,7 +3,7 @@ from . import mongoclient
 
 
 config = {
-    "DEBUG": True,
+    "DEBUG": False,
     "JSON_AS_ASCII": False
 }
 
@@ -16,7 +16,7 @@ app.config.from_mapping(config)
 def ping():
     return jsonify({ 'mensaje': 'App Online' })
 
-@app.route('/custom/sepomex/<string:zipCode>', methods=['GET'])
+@app.route('/cp/<string:zipCode>', methods=['GET'])
 def customSepomexHandler(zipCode):
     if not zipCode.isnumeric() : abort(400)
 
