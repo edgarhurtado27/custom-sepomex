@@ -5,6 +5,7 @@ import logging, os
 logging.basicConfig(level=logging.INFO)
 
 class CustomMongoClient(object):
+    HEROKU_INSTANCE = os.getenv('HEROKU_INSTANCE')
     MONGO_HOST = os.getenv('CUSTOM_MONGO_HOST')
     MONGO_PORT = 27017
     MONGO_DATABASE = 'sepomex'
@@ -12,7 +13,11 @@ class CustomMongoClient(object):
     dbCollection = {}
     MONGO_USERNAME = os.getenv('MONGO_USERNAME')
     MONGO_PASSWORD = os.getenv('MONGO_PASSWORD')
+
     uri = f'mongodb://{MONGO_USERNAME}:{MONGO_PASSWORD}@{MONGO_HOST}:{MONGO_PORT}/{MONGO_DATABASE}?authSource=admin'
+
+    if HEROKU_INSTANCE is not None and HEROKU_INSTANCE == 'true' :
+        uri = f'mongodb+srv://{MONGO_USERNAME}:{MONGO_PASSWORD}@{MONGO_HOST}/{MONGO_DATABASE}?retryWrites=true&w=majority'
 
     logging.info('Connecting :::: ', uri)
 
