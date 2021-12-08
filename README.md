@@ -4,7 +4,7 @@
 **https://custom-sepomex.herokuapp.com/**
 
 El proyecto surge ante la necesidad de tener un servicio REST que sea capaz de entregar la entidad federativa y colonia a partir del código postal.
-Si bien [SEPOMEX](https://www.correosdemexico.gob.mx/SSLServicios/ConsultaCP/Descarga.aspx) tiene un servicio en linea para consultar esta información, éste no es posible integrarlo de una forma eficiente con una aplicación web o móvil.
+Si bien [SEPOMEX](https://www.correosdemexico.gob.mx/SSLServicios/ConsultaCP/Descarga.aspx) tiene un portal en linea para consultar esta información, contar con un micro-servicio haria posible integrarlo de forma eficiente con una aplicación web o móvil.
 
 Con base en lo anterior el proyecto tiene sólo un **inbound rest api** de tipo GET, lo puedes consultar mandando una petición a la siguiente ruta:
 
@@ -43,7 +43,7 @@ Esta sección detalla los pasos que debes seguir para hacer el setup del proyect
    ```sh
    docker-compose up -d
    ```
-3. Valida que los contenedores **web-sepomex** y **mongo-sepomex** se estan online
+3. Valida que los contenedores **web-sepomex** y **mongo-sepomex** estan online
    ```JS
    docker ps
    ```
@@ -61,14 +61,15 @@ Una vez que el seeder finalice de importar la información, puedes realizar cons
 
 Request
 ```sh
-curl curl localhost:5000/cp/40506
+curl localhost:5000/cp/40506
 ```
 Response 
 ```sh
 {"codigoPostal": "40506", "colonias": ["La Sidra (Puente Arroyo Seco)", "El Veladero", "Ojo de Agua", "Palapa"], "estado": "Guerrero", "municipio": "Arcelia" }
 ```
 ## Disclaimer
-Recomiendo encarecidamente **no usar la aplicación desplegada en Heroku** para tus aplicaciones en ambientes productivos, las instancias en las que está desplegada tanto el servicio REST como la base de datos son gratuitas por lo que su procesamiento es limitado. En su lugar es preferible descargar el proyecto y desplegarlo en tus propios servidores y instancias, donde sólo tú o tu compañía tengan acceso.  
+**No recomiendo usar la aplicación desplegada en Heroku** para tus aplicaciones en ambientes productivos, las instancias en las que está desplegada tanto el servicio REST como la base de datos son gratuitas, por lo que su poder de procesamiento es limitado. 
+En su lugar es preferible descargar el proyecto y desplegarlo en tus propios servidores/instancias, donde sólo tú o tu compañía tengan acceso.  
 
 ## Contributing
 Este es mi primer proyecto con Python por lo que seguramente no seguí las mejores prácticas del lenguaje, así que las contribuciones son bienvenidas.
